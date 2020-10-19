@@ -9,6 +9,7 @@ BitMapImage::BitMapImage()
 	this->rest = nullptr;
 	this->restSize = 0;
 	this->pallete = new RGBQUAD[256];
+	this->loaded = false;
 }
 
 BitMapImage::~BitMapImage()
@@ -31,15 +32,32 @@ bool BitMapImage::LoadDIB(CString file_path)
 	this->bitMapInfo = (BITMAPINFO*)rest;
 	bitMapInfoHeader = (BITMAPINFOHEADER*)rest;
 	z = new CRect(0, 0, bitMapInfoHeader->biHeight, bitMapInfoHeader->biWidth);
+	loaded = true;
 	return true;
 
 }
 
 bool BitMapImage::PaintDIB(HDC kontekst, CRect prost_docelowy, CRect prost_zrodlowy)
 {
+	int hig;
+	int width;
+	if (loaded) {
+		if (prost_docelowy.Width() * bitMapInfoHeader->biHeight < bitMapInfoHeader->biWidth * prost_docelowy.Height()) {
+			hig = bitMapInfoHeader->biHeight * prost_docelowy.Height() / bitMapInfoHeader->biWidth;
+			width = prost_docelowy.Width();
+		}
+		else {
+			hig = prost_docelowy.Height();
+			width = bitMapInfoHeader->biWidth * prost_docelowy.Width() / bitMapInfoHeader->biHeight;
+		}
+	}
+	else {
+		width = prost_docelowy.Width();
+		hig = prost_docelowy.Height();
+	}
 
 	SetStretchBltMode(kontekst, COLORONCOLOR);
-	StretchDIBits(kontekst, 0, 0, prost_docelowy.Width(), prost_docelowy.Height(), 0, 0, bitMapInfoHeader->biWidth, bitMapInfoHeader->biHeight, this->image_out, this->bitMapInfo, DIB_RGB_COLORS, SRCCOPY);
+	StretchDIBits(kontekst, 0, 0, width, hig, 0, 0, bitMapInfoHeader->biWidth, bitMapInfoHeader->biHeight, this->image_out, this->bitMapInfo, DIB_RGB_COLORS, SRCCOPY);
 	return true;
 }
 
@@ -78,6 +96,7 @@ bool BitMapImage::CreateGreyscaleDIB(CRect rozmiar_obrazu, int xPPM, int yPPM)
 	std::memcpy((char*)rest + sizeof(BITMAPINFOHEADER) + (256 * sizeof(RGBQUAD)), image_out, bitMapInfoHeader->biSizeImage);
 	this->bitMapInfo = (BITMAPINFO*)rest;
 	z = new CRect(0, 0, bitMapInfoHeader->biHeight, bitMapInfoHeader->biWidth);
+	loaded = true;
 	return true;
 }
 
@@ -98,17 +117,6 @@ bool BitMapImage::SaveDIB(CString sciezka_do_pliku)
 	{
 		WriteFile(hFile, image_out, bitMapInfoHeader->biSizeImage, &dwWritten, NULL);
 	}
-	//else
-	//{
-	//	char* empty = new char[4 - bitMapInfoHeader->biWidth % 4];
-	//	for (int i = 0; i < bitMapInfoHeader->biHeight; ++i)
-	//	{
-	//		LONG lWidth = bitMapInfoHeader->biWidth;
-	//		//file_.Write((void*)(image_out[i*bitMapInfoHeader->biWidth]), bitMapInfoHeader->biWidth);
-	//		WriteFile(hFile, &image_out[i * lWidth], lWidth, &dwWritten, NULL);
-	//		WriteFile(hFile, empty, 4 - lWidth % 4, &dwWritten, NULL);
-	//	}
-	//}
 	CloseHandle(hFile);
 	return true;
 }

@@ -26,6 +26,7 @@ private:
 	CFile file;
 	RGBQUAD *pallete;
 	void* image_out;
+	bool loaded;
 
 };
 
