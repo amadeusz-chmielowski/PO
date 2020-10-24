@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="BitMapImage.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogHistogram.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ImgWnd.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ParamsDlg.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="PO1.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="PO1Dlg.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BitMapImage.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogHistogram.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ImgWnd.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ParamsDlg.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="PO1.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="PO1Dlg.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PO1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\PO1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\PO1.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{38c04f1d-ce8a-4eb1-bb5d-435a307b1dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{a6e91f1e-2511-40eb-ab96-69bc32124024}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
